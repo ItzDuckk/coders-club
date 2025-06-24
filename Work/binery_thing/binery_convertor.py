@@ -1,23 +1,24 @@
-def binaryConversion(input , size):
-    Number=input
-    Remainder=0
-    output = ""
-    more = 0
-    while Number != 0:
-        Remainder=Number%2
-        Number=int(Number/2)
-        output += str(Remainder)
-
-    more = size-len(output)
-    
-    if more >= 0:
-        for i in range(1,more):
-            output+="0"
-        print(output[::-1])
-    elif more < 0:
-        print(f"Error: The number {input} needs {len(output)} bits, but only {size} were requested.")
+def twos_complement(val, size):
+    # range-check
+    if val < 0:
+        print("Error: pass a non-negative value (the function negates it).")
         return
-    
-    
+    if val >= (2 ** size):
+        print(f"Error: {val} needs more than {size} bits.")
+        return
 
-binaryConversion(42,16)
+    mask = (2 ** size) - 1
+    flipped = (~val + 1) & mask
+
+    output = ''
+
+    for i in  range(size-1 , -1 , -1):
+        if (flipped >> i) & 1:
+            output += '1'
+        else:
+            output += '0'
+
+    print(output)
+
+twos_complement(42, 8)
+
