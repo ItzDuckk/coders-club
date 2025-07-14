@@ -1,6 +1,7 @@
-import sys, re
+import sys
 
 def pretty_print(words):
+    print(f"The Words that apear the most in the file are:")
 
     for key in words:
         value = words[key]
@@ -33,8 +34,8 @@ def count_words(string):
 
 def read_file(location):
     try:
-        with open(location, 'r') as f:
-            return f.read()
+        with open(location, 'r') as file:
+            return file.read()
     except FileNotFoundError:
         print(f"Error: file '{location}' was not found.")
 
